@@ -134,7 +134,7 @@ int main() {
         }
         else if(mic.getPosition().x > 800)
         {
-            // obnov levé skóre
+            // obnov leve skore
             leveSkore++;
             leveSkoreText.setString(std::to_string(leveSkore));
 
@@ -142,7 +142,7 @@ int main() {
             mic.restarPosition();
         }
         
-        //výsledky
+        //vysledky
 
         if (leveSkore >= 4)
         {
