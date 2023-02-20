@@ -10,52 +10,52 @@ using namespace std;
 
 
 int main() {
-    // Hlavní okno
+    // Hlavni okno
     sf::RenderWindow okno(sf::VideoMode(800, 600), "Pong");
     okno.setFramerateLimit(60);
 
-    // Vytvoø levé obdélník
+    // Vytvor levy obdelnik
     Obdelnik levy_obdelnik(0, (600 - 50) / 2, 15, 100, sf::Color::Blue);
 
-    // Vytvoø pravý obdélník
+    // Vytvor pravy obdélnik
     Obdelnik pravy_obdelnik(785, (600 - 50) / 2, 15, 100, sf::Color::Red);
 
-    // Vytvoø míè
-    Míè míè(400, 300, 10, sf::Color::White);
+    // Vytvor mic
+    Mic mic(400, 300, 10, sf::Color::White);
 
-    // Urèi smìr a rychlost míèe
-    float ballRadius = míè.getRadius();
+    // Urci smer a rychlost mice
+    float ballRadius = mic.getRadius();
     int x = std::rand() % 8 + 7;
     int y = std::rand() % 8 + 7;
-    sf::Vector2f rychlostMíèe(x, y);
+    sf::Vector2f rychlostMice(x, y);
 
-    int levéSkore = 0;
-    int pravéSkore = 0;
+    int leveSkore = 0;
+    int praveSkore = 0;
     bool pohybObdelniku = true;
 
-    // Vytvoø font
+    // Vytvor font
     sf::Font font;
     if (!font.loadFromFile("C:/Hra/Fonty/font.ttf")) {
         std::cout << "Neda se nacist" << std::endl;
     }
 
-    // text pro levé skóre
+    // text pro leve skore
     sf::Text leveSkoreText;
     leveSkoreText.setFont(font);
-    leveSkoreText.setString(std::to_string(levéSkore));;
+    leveSkoreText.setString(std::to_string(leveSkore));;
     leveSkoreText.setCharacterSize(50);
     leveSkoreText.setFillColor(sf::Color::White);
     leveSkoreText.setPosition(20, 20);
 
-    //text pro pravé skore
+    //text pro prave skore
     sf::Text praveSkoreText;
     praveSkoreText.setFont(font);
-    praveSkoreText.setString(std::to_string(pravéSkore));
+    praveSkoreText.setString(std::to_string(praveSkore));
     praveSkoreText.setCharacterSize(50);
     praveSkoreText.setFillColor(sf::Color::White);
     praveSkoreText.setPosition(760, 20);
 
-    //text pro výsledek
+    //text pro vysledek
     sf::Text vysledek;
     vysledek.setFont(font);
     vysledek.setString("The left player wins!");
@@ -79,10 +79,10 @@ int main() {
 
         okno.clear(sf::Color::Black);
 
-        //Zobraz vše potøebné
+        //Zobraz vse potrebne
         levy_obdelnik.draw(okno);
         pravy_obdelnik.draw(okno);
-        míè.draw(okno);
+        mic.draw(okno);
 
         okno.draw(leveSkoreText);
         okno.draw(praveSkoreText);
@@ -99,55 +99,55 @@ int main() {
                 pravy_obdelnik.move(0, 10);
         }
 
-        sf::Vector2f míèPozice = míè.getPosition();
-        sf::Vector2f míèRychlost(x, y);
+        sf::Vector2f micPozice = mic.getPosition();
+        sf::Vector2f micRychlost(x, y);
 
-        if (míèPozice.y + 2 * míè.getRadius() > 600 || míèPozice.y < 0)
-            míèRychlost.y = -míèRychlost.y;
-        if (míèPozice.x + 2 * míè.getRadius() > 800 || míèPozice.x < 0)
-            míèRychlost.x = -míèRychlost.x;
+        if (micPozice.y + 2 * mic.getRadius() > 600 || micPozice.y < 0)
+            micRychlost.y = -micRychlost.y;
+        if (micPozice.x + 2 * mic.getRadius() > 800 || micPozice.x < 0)
+            micRychlost.x = -micRychlost.x;
 
-        sf::Vector2f ballPos = míè.getPosition();
-        ballPos += rychlostMíèe;
-        míè.setPosition(ballPos);
+        sf::Vector2f ballPos = mic.getPosition();
+        ballPos += rychlostMice;
+        mic.setPosition(ballPos);
 
 
-        if (levy_obdelnik.getGlobalBounds().intersects(míè.getGlobalBounds()) ||
-            pravy_obdelnik.getGlobalBounds().intersects(míè.getGlobalBounds()))
+        if (levy_obdelnik.getGlobalBounds().intersects(mic.getGlobalBounds()) ||
+            pravy_obdelnik.getGlobalBounds().intersects(mic.getGlobalBounds()))
         {
-            rychlostMíèe.x = -rychlostMíèe.x; // Reverse x velocity
+            rychlostMice.x = -rychlostMice.x; // Reverse x velocity
         }
 
         // check if the ball hit the top or bottom
         if (ballPos.y - ballRadius < 0 || ballPos.y + ballRadius > okno.getSize().y)
         {
-            rychlostMíèe.y = -rychlostMíèe.y; // reverse the vertical velocity
+            rychlostMice.y = -rychlostMice.y; // reverse the vertical velocity
         }
         
-        if (míè.getPosition().x + 2 * ballRadius < 0)
+        if (mic.getPosition().x + 2 * ballRadius < 0)
         {
             // obnov pravé skóre
-            pravéSkore++;
-            praveSkoreText.setString(std::to_string(pravéSkore));
+            praveSkore++;
+            praveSkoreText.setString(std::to_string(praveSkore));
 
-            míè.restarPosition();
+            mic.restarPosition();
         }
-        else if(míè.getPosition().x > 800)
+        else if(mic.getPosition().x > 800)
         {
             // obnov levé skóre
-            levéSkore++;
-            leveSkoreText.setString(std::to_string(levéSkore));
+            leveSkore++;
+            leveSkoreText.setString(std::to_string(leveSkore));
 
             // Ball is outside of the screen, restart it
-            míè.restarPosition();
+            mic.restarPosition();
         }
         
         //výsledky
 
-        if (levéSkore >= 4)
+        if (leveSkore >= 4)
         {
 
-            rychlostMíèe = sf::Vector2f(0, 0);
+            rychlostMice = sf::Vector2f(0, 0);
             if (!konecHry) {
                 konecHry = true;
                 èas.restart();
@@ -155,12 +155,12 @@ int main() {
             pohybObdelniku = false;
             okno.draw(vysledek);
         }
-        if (pravéSkore >= 4)
+        if (praveSkore >= 4)
         {
             vysledek.setPosition(180, 20);
             vysledek.setString("The right player wins!");
 
-            rychlostMíèe = sf::Vector2f(0, 0);
+            rychlostMice = sf::Vector2f(0, 0);
             if (!konecHry) {
                 konecHry = true;
                 èas.restart();

@@ -5,9 +5,9 @@
 #include <chrono>
 
 
-class Mни {
+class Mic {
 public:
-    Mни(float x, float y, float radius, sf::Color color) {
+    Mic(float x, float y, float radius, sf::Color color) {
         mни_tvar.setPosition(x, y);
         mни_tvar.setRadius(radius);
         mни_tvar.setFillColor(color);

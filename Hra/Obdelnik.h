@@ -14,7 +14,9 @@ public:
         obdelnik_tvar.setFillColor(color);
     }
 
-    void move(float x, float y) {
+    void move(float x, float y) 
+    {
+    
         obdelnik_tvar.move(x, y);
     }
 
