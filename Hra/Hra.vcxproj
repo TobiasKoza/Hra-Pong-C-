@@ -140,11 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Míč.cpp" />
+    <ClCompile Include="mic.cpp" />
     <ClCompile Include="Obdelnik.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Míč.h" />
+    <ClInclude Include="mic.h" />
     <ClInclude Include="Obdelnik.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

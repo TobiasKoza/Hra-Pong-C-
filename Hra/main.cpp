@@ -4,7 +4,7 @@
 #include <thread>
 #include <chrono>
 #include "Obdelnik.h"
-#include "Mни.h"
+#include "mic.h"
 using namespace std;
 
 
